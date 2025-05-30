@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robert Andrei — Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#home" class="active">/home</a></li>
+          <li><a href="#portfolio">/portfolio</a></li>
+          <li><a href="#contact">/contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Home Section -->
+      <section id="home" class="active">
+        <div class="hero">
+          <h1>Robert Andrei</h1>
+          <p class="subtitle">Developer · Based in Romania</p>
+
+          <div class="availability">
+            <div class="availability-text">
+              <span class="available-dot"></span>
+              <span>Open to new opportunities</span>
+            </div>
+            <a href="#contact" class="hire-me-button">Hire Me →</a>
+          </div>
+
+          <div class="current-project">
+            <h3>Current Project</h3>
+            <div class="project-card current">
+              <div class="project-header">
+                <h4>Sales Analytics Dashboard</h4>
+                <span class="year">2024</span>
+              </div>
+              <p>Building an interactive dashboard to visualize sales trends and customer behavior using Power BI and
+                Python.</p>
+              <div class="tech-stack">
+                <span>Power BI</span>
+                <span>Python</span>
+                <span>SQL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio Section -->
+      <section id="portfolio">
+        <h2>/portfolio</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-header">
+              <h3>E-commerce Analytics System</h3>
+              <span class="year">2023</span>
+            </div>
+            <p>Developed a comprehensive analytics solution tracking customer journeys and conversion funnels.</p>
+            <div class="tech-stack">
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>Tableau</span>
+              <span>PostgreSQL</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">View Project →</a>
+              <a href="#" class="code-link">View Code <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <h3>Financial Data Pipeline</h3>
+              <span class="year">2023</span>
+            </div>
+            <p>Automated ETL pipeline for processing stock market data with error handling and alerts.</p>
+            <div class="tech-stack">
+              <span>Python</span>
+              <span>Airflow</span>
+              <span>AWS S3</span>
+              <span>Snowflake</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">View Project →</a>
+              <a href="#" class="code-link">View Code <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <h3>Customer Segmentation Model</h3>
+              <span class="year">2022</span>
+            </div>
+            <p>Machine learning model for customer segmentation with 92% prediction accuracy.</p>
+            <div class="tech-stack">
+              <span>Scikit-learn</span>
+              <span>Matplotlib</span>
+              <span>Jupyter</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">View Project →</a>
+              <a href="#" class="code-link">View Code <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <h2>/contact</h2>
+        <div class="contact-container">
+          <div class="contact-info">
+            <p>I'm currently available for freelance work and full-time positions. Whether you have a project to discuss
+              or just want to connect, feel free to reach out!</p>
+
+            <div class="contact-methods">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>Email</h4>
+                  <a href="mailto:your.email@example.com">your.email@example.com</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fab fa-linkedin"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>LinkedIn</h4>
+                  <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fab fa-github"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>GitHub</h4>
+                  <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form id="contactForm" class="contact-form" netlify>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send Message →</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
