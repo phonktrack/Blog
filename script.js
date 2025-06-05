@@ -63,3 +63,19 @@ if (contactForm) {
   // Set home as active by default
   setActiveSection('home');
 });
+
+  function openModal() {
+    document.getElementById("codeModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("codeModal").style.display = "none";
+  }
+
+  // Optional: Close the modal when clicking outside of it
+  window.onclick = function(event) {
+    const modal = document.getElementById("codeModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
