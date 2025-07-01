@@ -458,4 +458,39 @@ h2 {
   .projects-grid {
     grid-template-columns: 1fr 1fr;
   }
+  
+  body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::after {
+  white-space: pre;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(110, 231, 183, 0.07); /* increased visibility */
+  pointer-events: none;
+  z-index: -1;
+  animation: scrollCode 50s linear infinite;
+  background-repeat: repeat;
+  background-size: cover;
+  filter: blur(1px); /* soft blur */
+  opacity: 1;
+  }
+
 }
