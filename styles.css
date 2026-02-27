@@ -9,6 +9,7 @@
   --nav-bg: rgba(10, 10, 10, 0.75);
   --form-bg: #1f1f1f;
   --border-color: #2a2a2a;
+  
   --mouse-x: 50%;
   --mouse-y: 50%;
 }
@@ -26,6 +27,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
+  -webkit-font-smoothing: antialiased;
 }
 
 body::before {
@@ -58,9 +60,17 @@ body::after {
   overflow: hidden;
 }
 
-@keyframes scrollCode {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y), 
+    var(--accent-glow), 
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: -2;
+  transition: background 0.15s ease;
 }
 
 .container {
@@ -146,6 +156,14 @@ h1 {
   color: transparent;
 }
 
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
 .nickname {
   font-size: 1.1rem;
   color: var(--accent);
@@ -165,14 +183,6 @@ h1 {
   max-width: 650px;
   color: var(--text-secondary);
   line-height: 1.8;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: var(--text);
-  font-weight: 600;
-  letter-spacing: -0.01em;
 }
 
 .availability {
@@ -238,6 +248,20 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   outline-offset: 4px;
 }
 
+.current-project {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+.current-project h4 {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -252,6 +276,7 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
+  font-family: inherit;
 }
 
 .project-card:hover {
@@ -277,6 +302,7 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text);
+  font-family: inherit;
 }
 
 .year {
@@ -300,13 +326,18 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
 }
 
 .tech-stack span {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.project-card.current .tech-stack span {
+  border-color: rgba(110, 231, 183, 0.2);
+  color: var(--accent);
 }
 
 .project-links {
@@ -315,8 +346,7 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   margin-top: auto;
 }
 
-.project-link,
-.code-link {
+.project-link, .code-link {
   font-weight: 500;
   text-decoration: none;
   display: inline-flex;
@@ -326,22 +356,12 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   transition: color 0.2s ease;
 }
 
-.project-link {
-  color: var(--accent);
-}
+.project-link { color: var(--accent); }
+.project-link:hover { color: #7ef5c6; text-shadow: 0 0 10px rgba(110, 231, 183, 0.4); }
 
-.project-link:hover {
-  color: #7ef5c6;
-  text-shadow: 0 0 10px rgba(110, 231, 183, 0.4);
-}
+.code-link { color: var(--text-secondary); }
+.code-link:hover { color: var(--text); }
 
-.code-link {
-  color: var(--text-secondary);
-}
-
-.code-link:hover {
-  color: var(--text);
-}
 
 .contact-container {
   display: grid;
@@ -383,15 +403,6 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   transform: scale(1.1) rotate(5deg);
 }
 
-.current-project h4 {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
 .contact-details h4 {
   font-size: 0.9rem;
   margin-bottom: 0.25rem;
@@ -409,9 +420,7 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   font-size: 1.1rem;
 }
 
-.contact-details a:hover {
-  color: var(--accent);
-}
+.contact-details a:hover { color: var(--accent); }
 
 .contact-form {
   background: var(--form-bg);
@@ -420,9 +429,7 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   border: 1px solid var(--border-color);
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-}
+.form-group { margin-bottom: 1.5rem; }
 
 .form-group label {
   display: block;
@@ -458,6 +465,30 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   min-height: 150px;
 }
 
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.social-links a {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+@keyframes scrollCode {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.9); }
@@ -469,40 +500,25 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
 }
 
 @keyframes slideUpFade {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 0 1.5rem;
-  }
-  
+  .container { padding: 0 1.5rem; }
   nav ul {
     gap: 1.5rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
   }
-  
   .availability {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.25rem;
   }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+  .projects-grid { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 768px) {
-  .contact-container {
-    grid-template-columns: 1fr 1fr;
-  }
+  .contact-container { grid-template-columns: 1fr 1fr; }
 }
