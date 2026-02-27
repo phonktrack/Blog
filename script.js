@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('contactForm');
   const modal = document.getElementById('codeModal');
 
+  document.addEventListener('mousemove', (e) => {
+  document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+  document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+});
+
   function setActiveSection(sectionId) {
     if (!sectionId) return;
 
