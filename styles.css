@@ -484,6 +484,41 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   transform: translateY(-3px);
 }
 
+/* ==========================================
+   8. FOOTER & COPYRIGHT
+   ========================================== */
+.site-footer {
+  text-align: center;
+  padding: 3rem 0; /* Extra breathing room at the bottom */
+  margin-top: 4rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.footer-content p {
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.site-footer strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.site-footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.site-footer a:hover {
+  border-bottom-color: var(--accent);
+  opacity: 0.8;
+}
+
 @keyframes scrollCode {
   0% { transform: translateY(0); }
   100% { transform: translateY(-50%); }
