@@ -468,9 +468,7 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
 .social-links {
   display: flex;
   gap: 1.5rem;
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
+  margin-top: 2rem; 
 }
 
 .social-links a {
@@ -484,14 +482,10 @@ button:focus-visible, .hire-me-button:focus-visible, a:focus-visible {
   transform: translateY(-3px);
 }
 
-/* ==========================================
-   8. FOOTER & COPYRIGHT
-   ========================================== */
 .site-footer {
   text-align: center;
-  padding: 3rem 0; /* Extra breathing room at the bottom */
-  margin-top: 4rem;
-  border-top: 1px solid var(--border-color);
+  padding: 3rem 0; 
+  margin-top: 2rem;
   color: var(--text-secondary);
   font-size: 0.85rem;
 }
