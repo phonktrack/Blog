@@ -52,15 +52,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (contactForm) {
+if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       const submitBtn = this.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;
 
+      const formData = new FormData(this);
+      
+      const emailValue = formData.get('email'); 
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailValue || !emailRegex.test(emailValue)) {
+        alert('Please enter a valid email address.');
+        if (submitBtn) submitBtn.disabled = false;
+        return;
+      }
+
       try {
-        const formData = new FormData(this);
         const response = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -81,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  
   window.openModal = () => {
     if (modal) modal.style.display = "block";
   };
