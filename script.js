@@ -1,81 +1,95 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // Handle navigation
-  const navLinks = document.querySelectorAll('nav a');
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.querySelector('nav');
   const sections = document.querySelectorAll('section');
-  
+  const hireMeButton = document.querySelector('.hire-me-button');
+  const contactForm = document.getElementById('contactForm');
+  const modal = document.getElementById('codeModal');
+
   function setActiveSection(sectionId) {
-    // Remove active class from all nav links and sections
-    navLinks.forEach(link => link.classList.remove('active'));
+    if (!sectionId) return;
+
+    const targetSection = document.getElementById(sectionId);
+    const targetLink = document.querySelector(`nav a[href="#${sectionId}"]`);
+
+    if (!targetSection) return; 
+
+    document.querySelectorAll('nav a.active').forEach(link => link.classList.remove('active'));
     sections.forEach(section => section.classList.remove('active'));
     
-    // Add active class to clicked link and matching section
-    document.querySelector(`nav a[href="#${sectionId}"]`).classList.add('active');
-    document.getElementById(sectionId).classList.add('active');
+    targetLink?.classList.add('active');
+    targetSection.classList.add('active');
     
-    // Scroll to top smoothly
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+    
+    history.pushState(null, null, `#${sectionId}`);
+    
   }
-  
-  // Handle nav link clicks
-  navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const sectionId = this.getAttribute('href').substring(1);
-      setActiveSection(sectionId);
+  if (nav) {
+    nav.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        setActiveSection(href.substring(1));
+      }
     });
-  });
-  
-  // Handle Hire Me button
-  const hireMeButton = document.querySelector('.hire-me-button');
+  }
+
   if (hireMeButton) {
-    hireMeButton.addEventListener('click', function(e) {
+    hireMeButton.addEventListener('click', (e) => {
       e.preventDefault();
       setActiveSection('contact');
     });
   }
-  
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', function (e) {
-    e.preventDefault(); // Stop default submit (so we can use JS)
 
-    const formData = new FormData(this);
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData).toString(),
-    })
-    .then(() => {
-      alert('Thank you! Your message has been sent.');
-      this.reset();
-    })
-    .catch((error) => {
-      alert('Oops! There was a problem.');
-      console.error(error);
+      const submitBtn = this.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(this);
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString(),
+        });
+
+        if (response.ok) {
+          alert('Thank you! Your message has been sent.');
+          this.reset();
+        } else {
+          throw new Error('Network response was not ok.');
+        }
+      } catch (error) {
+        alert('Oops! There was a problem submitting your form.');
+        console.error('Form submission error:', error);
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
     });
-  });
-}
-  
-  // Set home as active by default
-  setActiveSection('home');
-});
-
-  function openModal() {
-    document.getElementById("codeModal").style.display = "block";
   }
+  window.openModal = () => {
+    if (modal) modal.style.display = "block";
+  };
 
-  function closeModal() {
-    document.getElementById("codeModal").style.display = "none";
-  }
+  window.closeModal = () => {
+    if (modal) modal.style.display = "none";
+  };
 
-  // Optional: Close the modal when clicking outside of it
-  window.onclick = function(event) {
-    const modal = document.getElementById("codeModal");
+  window.addEventListener('click', (event) => {
     if (event.target === modal) {
-      modal.style.display = "none";
+      window.closeModal();
     }
-  }
+  });
+
+  const initialHash = window.location.hash.substring(1);
+  setActiveSection(initialHash || 'home'); 
+});
