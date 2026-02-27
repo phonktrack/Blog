@@ -40,19 +40,6 @@ body::before {
   z-index: -3;
 }
 
-.bg-glow {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    600px circle at var(--mouse-x) var(--mouse-y), 
-    var(--accent-glow), 
-    transparent 40%
-  );
-  pointer-events: none;
-  z-index: -2;
-  transition: background 0.15s ease;
-}
-
 body::after {
   content: '01001000 01100101 01101100 01101100 01101111 \A 01010111 01101111 01110010 01101100 01100100 \A 01000011 01101111 01100100 01100101 \A 01010011 01101100 01100101 01100101 01110000 \A 01010010 01100101 01110000 01100101 01100001 01110100';
   white-space: pre-wrap;
