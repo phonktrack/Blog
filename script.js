@@ -1,4 +1,10 @@
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+
   const nav = document.querySelector('nav');
   const sections = document.querySelectorAll('section');
   const hireMeButton = document.querySelector('.hire-me-button');
@@ -6,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('codeModal');
 
   document.addEventListener('mousemove', (e) => {
-  document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-  document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-});
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
 
-  function setActiveSection(sectionId) {
+  function setActiveSection(sectionId, isInitialLoad = false) {
     if (!sectionId) return;
 
     const targetSection = document.getElementById(sectionId);
@@ -23,15 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     targetLink?.classList.add('active');
     targetSection.classList.add('active');
-    
+
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: isInitialLoad ? 'instant' : 'smooth' 
     });
     
-    history.pushState(null, null, `#${sectionId}`);
-    
+    if (!isInitialLoad) {
+      history.pushState(null, null, `#${sectionId}`);
+    }
   }
+
   if (nav) {
     nav.addEventListener('click', (e) => {
       const link = e.target.closest('a');
@@ -52,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-if (contactForm) {
+  if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
@@ -60,9 +68,7 @@ if (contactForm) {
       if (submitBtn) submitBtn.disabled = true;
 
       const formData = new FormData(this);
-      
       const emailValue = formData.get('email'); 
-
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       if (!emailValue || !emailRegex.test(emailValue)) {
@@ -108,5 +114,5 @@ if (contactForm) {
   });
 
   const initialHash = window.location.hash.substring(1);
-  setActiveSection(initialHash || 'home'); 
+  setActiveSection(initialHash || 'home', true); 
 });
