@@ -10,10 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const hireMeButton = document.querySelector('.hire-me-button');
   const contactForm = document.getElementById('contactForm');
   const modal = document.getElementById('codeModal');
+  const header = document.querySelector('header');
+  let lastScrollY = window.scrollY;
 
   document.addEventListener('mousemove', (e) => {
     document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
     document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > lastScrollY && window.scrollY > 50) {
+      header.classList.add('nav-hidden');
+    } else {
+      header.classList.remove('nav-hidden');
+    }
+    
+    lastScrollY = window.scrollY;
   });
 
   function setActiveSection(sectionId, isInitialLoad = false) {
